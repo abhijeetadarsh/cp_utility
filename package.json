@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "nodemon src/index.js",
+    "cu": "./src/bin/cu.js",
     "fmt": "npx prettier --write ."
   },
   "author": "Abhijeet Adarsh",
