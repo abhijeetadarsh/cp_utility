@@ -2,7 +2,7 @@
 
 import { Command } from "commander";
 import { execSync } from "child_process";
-import { showConfig, updateConfig } from "../lib/config_handler.js";
+import { getConfig, showConfig, updateConfig } from "../lib/config_handler.js";
 import logger from "../lib/logger.js";
 import path from "path";
 import { fileURLToPath } from "url";
