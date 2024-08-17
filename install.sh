@@ -13,47 +13,50 @@ else
     SUDO=''
 fi
 
-# Define the package name and required version for nodejs
+# Function to compare versions
+version_lt() {
+    # Compare two versions, returns true if the first is less than the second
+    [ "$(printf '%s\n' "$1" "$2" | sort -V | head -n1)" != "$2" ]
+}
+
+# Check and install nodejs if needed
 package_nodejs="nodejs"
 nodejs_installed_version=$(pacman -Q $package_nodejs 2>/dev/null | awk '{print $2}')
 nodejs_required_version="22.5.1"
 
-# Check and install nodejs if needed
 if [[ -z "$nodejs_installed_version" ]]; then
     echo -e "${YELLOW}$package_nodejs is not installed. Installing...${NC}"
     $SUDO pacman -S --noconfirm $package_nodejs
-elif [[ "$nodejs_installed_version" < "$nodejs_required_version" ]]; then
+elif version_lt "$nodejs_installed_version" "$nodejs_required_version"; then
     echo -e "${YELLOW}$package_nodejs version $nodejs_installed_version is older than $nodejs_required_version. Installing the latest version...${NC}"
     $SUDO pacman -S --noconfirm $package_nodejs
 else
     echo -e "${GREEN}$package_nodejs version $nodejs_installed_version is already up-to-date.${NC}"
 fi
 
-# Define the package name and required version for npm
+# Check and install npm if needed
 package_npm="npm"
 npm_installed_version=$(pacman -Q $package_npm 2>/dev/null | awk '{print $2}')
 npm_required_version="9.0.0"
 
-# Check and install npm if needed
 if [[ -z "$npm_installed_version" ]]; then
     echo -e "${YELLOW}$package_npm is not installed. Installing...${NC}"
     $SUDO pacman -S --noconfirm $package_npm
-elif [[ "$npm_installed_version" < "$npm_required_version" ]]; then
+elif version_lt "$npm_installed_version" "$npm_required_version"; then
     echo -e "${YELLOW}$package_npm version $npm_installed_version is older than $npm_required_version. Installing the latest version...${NC}"
     $SUDO pacman -S --noconfirm $package_npm
 else
     echo -e "${GREEN}$package_npm version $npm_installed_version is already up-to-date.${NC}"
 fi
 
-# Define the required version for pm2
+# Check and install pm2 if needed
 pm2_required_version="5.4.0"
-pm2_installed_version=$(pm2 -v 2>/dev/null)
+pm2_installed_version=$(pm2 -v 2>/dev/null | awk '{print $1}')
 
-# Check if pm2 is installed via npm
 if [[ -z "$pm2_installed_version" ]]; then
     echo -e "${YELLOW}pm2 is not installed. Installing via npm...${NC}"
     $SUDO npm install -g pm2
-elif [[ "$pm2_installed_version" < "$pm2_required_version" ]]; then
+elif version_lt "$pm2_installed_version" "$pm2_required_version"; then
     echo -e "${YELLOW}pm2 version $pm2_installed_version is older than $pm2_required_version. Updating via npm...${NC}"
     $SUDO npm install -g pm2
 else
