@@ -94,17 +94,17 @@ case "$SHELL" in
     */bash)
         echo -e "${YELLOW}Updating ~/.bashrc to include $path_to_add in PATH...${NC}"
         echo "export PATH=\"$path_to_add:\$PATH\"" >> "$HOME/.bashrc"
-        source "$HOME/.bashrc"
+        echo -e "${YELLOW}Please run 'source ~/.bashrc' to apply the changes.${NC}"
         ;;
     */zsh)
         echo -e "${YELLOW}Updating ~/.zshrc to include $path_to_add in PATH...${NC}"
         echo "export PATH=\"$path_to_add:\$PATH\"" >> "$HOME/.zshrc"
-        source "$HOME/.zshrc"
+        echo -e "${YELLOW}Please run 'source ~/.zshrc' to apply the changes.${NC}"
         ;;
     */fish)
         echo -e "${YELLOW}Updating ~/.config/fish/config.fish to include $path_to_add in PATH...${NC}"
         echo "set -gx PATH $path_to_add \$PATH" >> "$HOME/.config/fish/config.fish"
-        source "$HOME/.config/fish/config.fish"
+        echo -e "${YELLOW}Please run 'source ~/.config/fish/config.fish' to apply the changes.${NC}"
         ;;
     *)
         echo -e "${RED}Unsupported shell detected ($SHELL). Please manually add $path_to_add to your PATH.${NC}"
