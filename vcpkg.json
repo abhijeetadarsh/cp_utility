@@ -1,0 +1,9 @@
+{
+  "name": "cu",
+  "version": "0.1.0",
+  "dependencies": [
+    "cpr",
+    "nlohmann-json",
+    "cli11"
+  ]
+}
