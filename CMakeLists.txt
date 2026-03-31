@@ -13,6 +13,7 @@ add_executable(cu ${SRC_DIR}/main.cpp)
 find_package(cpr CONFIG REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
 find_package(cli11 CONFIG REQUIRED)
+find_package(spdlog CONFIG REQUIRED)
 
 target_include_directories(cu PRIVATE ${INC_DIR})
 
@@ -20,4 +21,5 @@ target_link_libraries(cu PRIVATE
 	cpr::cpr
 	nlohmann_json::nlohmann_json
 	CLI11::CLI11
+	spdlog::spdlog
 )

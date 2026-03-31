@@ -2,8 +2,9 @@
   "name": "cu",
   "version": "0.1.0",
   "dependencies": [
+    "cli11",
     "cpr",
     "nlohmann-json",
-    "cli11"
+    "spdlog"
   ]
 }
